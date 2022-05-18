@@ -1,0 +1,6 @@
+plotly==5.6.0
+pandas==1.2.4
+matplotlib
+seaborn
+numpy
+torch==1.8.1

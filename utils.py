@@ -14,10 +14,7 @@ NAVBAR_PATHS = {
     'VISUALIZING THE SUBSPACES': 'subspace'
 }
 
-SETTINGS = {
-    'OPTIONS':'options',
-    'CONFIGURATION':'configuration'
-}
+
 
 
 def inject_custom_css(file):
@@ -35,12 +32,7 @@ def get_current_route():
 def navbar_component():
     navbar_items = ''
     for key, value in NAVBAR_PATHS.items():
-        navbar_items += (f'<a class="navitem" href="/?nav={value}">{key}</a>')
-
-    settings_items = ''
-    for key, value in SETTINGS.items():
-        settings_items += (
-            f'<a href="/?nav={value}" class="settingsNav">{key}</a>')
+        navbar_items += (f'<a class="navitem" href="https://share.streamlit.io/continual-subspace/policies/main/?nav={value}">{key}</a>')
 
     component = rf'''
             <nav class="container navbar" id="navbar">

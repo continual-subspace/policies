@@ -4,5 +4,4 @@ matplotlib
 seaborn
 numpy
 torch==1.8.1
-PIL
-codecs
+

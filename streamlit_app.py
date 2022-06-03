@@ -1,6 +1,7 @@
 import streamlit as st
 from utils import *
 from views import method, scenario, visualizing
+from PIL import Image
 
 def run_UI():
     route = get_current_route()
@@ -14,9 +15,10 @@ def run_UI():
         visualizing.run()
         
 if __name__ == "__main__":
+    img = Image.open("data/images/icon.png")
     st.set_page_config(
         page_title="Continual Subspace of Policies",
-        page_icon="🌀",
+        page_icon=img,
         layout="wide",
         menu_items={}
     )

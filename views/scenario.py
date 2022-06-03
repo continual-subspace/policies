@@ -67,18 +67,18 @@ def run():
     with st.expander(""+benchmark+" demo"):
         row_2_1,row_2_2,row_2_3,row_2_4  = st.columns([1,1,1,1])
         with row_2_1:
-            st.markdown("<h6 style='text-align: center; color: black; font-weight: 300;'>Hugefeet</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #ff4b4b; font-weight: 800;'>Hugefeet</h6>", unsafe_allow_html=True)
             file = codecs.open("data/trajectories/hc_hugefeet.html", "r", "utf-8").read()
             components.html(file)
         with row_2_2:
-            st.markdown("<h6 style='text-align: center; color: black; font-weight: 300;'>Moon</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #ff4b4b; font-weight: 800;'>Moon</h6>", unsafe_allow_html=True)
             file = codecs.open("data/trajectories/hc_moon.html", "r", "utf-8").read()
             components.html(file)
         with row_2_3:
-            st.markdown("<h6 style='text-align: center; color: black; font-weight: 300;'>Carrystuff</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #ff4b4b; font-weight: 800;'>Carrystuff</h6>", unsafe_allow_html=True)
             file = codecs.open("data/trajectories/hc_carrystuff.html", "r", "utf-8").read()
             components.html(file)
         with row_2_4:
-            st.markdown("<h6 style='text-align: center; color: black; font-weight: 300;'>Rainfall</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #ff4b4b; font-weight: 800;'>Rainfall</h6>", unsafe_allow_html=True)
             file = codecs.open("data/trajectories/hc_rainfall.html", "r", "utf-8").read()
             components.html(file)

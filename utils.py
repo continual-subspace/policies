@@ -26,7 +26,7 @@ def get_current_route():
     try:
         return st.experimental_get_query_params()['nav'][0]
     except:
-        return "scenarios"
+        return "about"
 
 
 def navbar_component():

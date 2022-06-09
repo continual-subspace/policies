@@ -1,5 +1,5 @@
 .navbar{
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: 'sans-serif', sans-serif;
     position: fixed;
     width: 100%;
     background: #353535;
@@ -18,7 +18,7 @@
     text-decoration: none !important;
     border-bottom: 2px solid transparent;
     font-size: 14px;
-    font-family: 'Trebuchet MS', sans-serif;
+    font-family: 'sans-serif', sans-serif;
 }
 
 .navitem:hover{
@@ -37,12 +37,12 @@ div[position="relative"]{
 }
 
 div[data-testid="stExpander"]{
-    background-color: rgba(68, 170, 153, 0.3);
-    border-radius: 22px;
+    background-color: #F0F2F6;
+    /*border-radius: 22px;
     border-style: solid;
     overflow: hidden !important;
     border-width: 1px;
-    margin: 0em 16em 0em 16em;
+    margin: 0em 0em 0em 0em;*/
 }
 
 iframe{
@@ -50,15 +50,15 @@ iframe{
 }
 
 div[role="button"]{
-    font-family: 'Trebuchet MS', sans-serif !important;
+    font-family: 'sans-serif', sans-serif !important;
     font-size: 16px;
 }
 
 h6{
-    font-family: 'Trebuchet MS', sans-serif !important;
+    font-family: 'sans-serif', sans-serif !important;
     font-size: 14px;
 }
 
 h1{
-    font-family: 'Trebuchet MS', sans-serif !important;
+    font-family: 'sans-serif', sans-serif !important;
 }

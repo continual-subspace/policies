@@ -5,29 +5,37 @@ from utils import *
 inject_custom_css('assets/styles.css')
 
 scenarios = {
-    "Forgetting scenario":["hugefeet","moon","carrystuff","rainfall"],
-    "Transfer scenario":["carrystuff_hugegravity","moon","defective_modules","hugefeet_rainfall"],
-    "Distraction scenario":["normal","inverted_actions","normal","inverted_actions"],
-    "Composability scenario":["tinyfeet","moon","carrystuff_hugegravity","tinyfeet_moon"]
+    "Forgetting_scenario":["hugefeet","moon","carrystuff","rainfall"],
+    "Transfer_scenario":["carrystuff_hugegravity","moon","defective_modules","hugefeet_rainfall"],
+    "Distraction_scenario":["normal","inverted_actions","normal","inverted_actions"],
+    "Composability_scenario":["tinyfeet","moon","carrystuff_hugegravity","tinyfeet_moon"]
 }
 
 #st.title("Visualizing the subspaces"
 st.markdown("<h3 style='text-align: left';>Visualizing the reward landscapes of the Subspaces</h3>",unsafe_allow_html = True)
-with st.expander("Reward Landscape"):
-    row_0_1,row_0_2 = st.columns([1,3])
+row_0_1,row_0_2 = st.columns([1,3])
 with row_0_1:
-    benchmark = st.selectbox('',["Forgetting scenario","Transfer scenario","Distraction scenario","Composability scenario"],index=0)
-    path = "../data/halfcheetah_benchmark"+str(0)+"/"
-    n_anchors = st.slider('number of anchors:', 3, 3, 4)
-    task = st.selectbox('Task',scenarios[benchmark],index=0)
-    with open(path+str(5)+"/eval.pkl", "rb") as f:
-        data = pickle.load(f)["stage_"+str(n_anchors)]["task_"+str(task)]
-    alphas, rewards, q1 = data["alphas"],data["rewards"],data["values1"]
-    fig = display_kshot(alphas,rewards,"reward")
-    if n_anchors == 4:
-        st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.pyplot(fig)
+    benchmark = st.selectbox('',["Forgetting_scenario","Transfer_scenario","Distraction_scenario","Composability_scenario"],index=0)
+    n_anchors = st.slider('number of anchors:', 3, 4, 3)
+    task = st.selectbox('Task',range(len(scenarios[benchmark])),format_func=lambda x: scenarios[benchmark][x], index=0)
+
+    #path = "/private/home/jbgaya/Work/crl_subspace/data/halfcheetah_benchmark3/2/eval.pkl"
+    #task = 0
+    #stage = 2
+    #value_name = "rewards"
+    #with open(path, "rb") as f:
+    #    data = pickle.load(f)["stage_"+str(stage)]
+    #alphas, rewards = data["task_"+str(task)]["alphas_before" if "before" in value_name else "alphas"].cpu(),data["task_"+str(task)][value_name].cpu()
+    #alphas = alphas[:,:-1] if "before" in value_name else alphas
+    #rewards /= 1355. #normalizing for perf
+
+with row_0_2:
+    path = "data/landscapes/"+benchmark+"/"+str(n_anchors)+"_anchors.pkl"
+    with open(path, "rb") as f:
+        data = pickle.load(f)["task_"+str(task)]
+    alphas, rewards = data["alphas"].cpu(),data["rewards"].cpu()
+    display_kshot(n_anchors,alphas,rewards,labels = scenarios[benchmark])
+
     #alphas, rewards, q1 = data["alphas"],data["rewards"],data["values1"]
     #cov = ((rewards - rewards.mean()) * (q1 - q1.mean())).sum() / (rewards.shape[0] - 1)
     #std1 = rewards.std()

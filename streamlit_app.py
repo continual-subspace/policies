@@ -15,41 +15,37 @@ def run_UI():
         "Prune":"If the new task bear some similarities to previously seen ones, a good policy αold i can typically be found in the old subspace. In this case, CSP <b style='color: #ff4b4b'>prunes</b> the subspace by removing the new anchor.",
     }
 
-    st.markdown("<h3 style='text-align: left';>Building a Subspace of Policies for scalable Continual Learning</h3>",unsafe_allow_html = True)
-    with st.expander("Our Method",expanded=True):
-        row_1_1,row_1_2 = st.columns([2,2])
-        with row_1_2:
-            state = st.select_slider(
-                '',
-                options=['Start', 'Grow', 'Extend', 'Prune'])
-            image = Image.open('data/images/'+state+'.png')
-            st.image(image, use_column_width = True)
-            st.markdown("<div style='text-align: justify'>"+d[state]+"</div>", unsafe_allow_html = True)
-        with row_1_1:
-            st.markdown("""
-            <div style='text-align: justify; padding: 2em 2em 2em 0';>
-                Developing autonomous agents that can continuously acquire new knowledge and skills is a key open
-                challenge in AI. This problem is referred to as continual reinforcement learning (CRL) and solving it
-                is crucial for large-scale deployment of autonomous agents in non-stationary domains such as robotics
-                or dialogue systems. The balance between 
-                <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">stability</span>,
-                <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">plasticity</span>, and
-                <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">scalability</span>
-                is crucial for designing effective CRL methods. 
-                While current methods perform well along some of these dimensions
-                they tend to suffer along others. We take inspiration from the mode connectivity literature to develop a novel CRL
-                method by iteratively learning a subspace of policies. <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">Continual Subspace of Policies</span>
-                (CSP) aims to strike a good balance between stability, plasticity, and scalability.
-                Instead of learning a single policy, CSP maintains an entire subspace of policies defined as a convex
-                hull in parameter space. The vertices of this convex hull are called anchors, with each anchor
-                representing the parameters of a policy. This subspace captures a large number of diverse behaviors
-                which enables efficient training on a wide range of tasks. 
-            </div>    
-                """,unsafe_allow_html = True)
-            for _ in range(2):
-                st.markdown("<div style='text-align: center'>"+"\n"+"</div>", unsafe_allow_html = True)
-            
- 
+    st.markdown("<h3 style='text-align: left;';>Building a Subspace of Policies for scalable Continual Learning</h3>",unsafe_allow_html = True)
+    row_1_1,row_1_2 = st.columns([2,2])
+    with row_1_2:
+        state = st.select_slider(
+            '',
+            options=['Start', 'Grow', 'Extend', 'Prune'])
+        image = Image.open('data/images/'+state+'.png')
+        st.image(image, use_column_width = True)
+        st.markdown("<div style='text-align: justify'>"+d[state]+"</div>", unsafe_allow_html = True)
+    with row_1_1:
+        st.markdown("""
+        <div style='text-align: justify; padding: 2em 2em 2em 0';>
+            Developing autonomous agents that can continuously acquire new knowledge and skills is a key open
+            challenge in AI. This problem is referred to as continual reinforcement learning (CRL) and solving it
+            is crucial for large-scale deployment of autonomous agents in non-stationary domains such as robotics
+            or dialogue systems. The balance between 
+            <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">stability</span>,
+            <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">plasticity</span>, and
+            <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">scalability</span>
+            is crucial for designing effective CRL methods. 
+            While current methods perform well along some of these dimensions
+            they tend to suffer along others. We take inspiration from the mode connectivity literature to develop a novel CRL
+            method by iteratively learning a subspace of policies. <span style="font:sans-serif; font-size:16px; color:#ff4b4b; font-weight:bold;">Continual Subspace of Policies</span>
+            (CSP) aims to strike a good balance between stability, plasticity, and scalability.
+            Instead of learning a single policy, CSP maintains an entire subspace of policies defined as a convex
+            hull in parameter space. The vertices of this convex hull are called anchors, with each anchor
+            representing the parameters of a policy. This subspace captures a large number of diverse behaviors
+            which enables efficient training on a wide range of tasks. 
+        </div>    
+            """,unsafe_allow_html = True)
+    st.markdown("<hr>", unsafe_allow_html = True)
     with st.expander("Scalability"):
         row_2_1,row_2_2 = st.columns([4,2])
         with row_2_1:
@@ -97,7 +93,7 @@ def run_UI():
             plt.tight_layout()
             st.pyplot(fig)
     with st.expander("Plasticity"):
-        row_3_1,row_3_2 = st.columns([4,2])
+        row_3_1,row_3_2 = st.columns([4,3])
         with row_3_1:
             txt = """
             In continual learning, plasticity can been seen as the <b style='color: #ff4b4b'>ability of a system to acquire additional knowledge very quickly</b>. When growing, policies included in the subspace inherits from previous tasks knowledge, and can leverage these knowledge combinations to peform better on unseen tasks. 
@@ -111,7 +107,30 @@ def run_UI():
         with row_3_2:
             st.image("data/images/plasticity.png")
     with st.expander("Stability"):
-        row_4_1,row_4_2 = st.columns([1,1])
+        row_4_1,_,row_4_2 = st.columns([4,1,4])
+        with row_4_1:
+            txt = """
+            Contrary to methods like EWC, CSP cannot suffer from <b style='color: #ff4b4b'>catastrophic forgetting</b>. Indeed, at the end of a training task
+            the best policy is stored as a convex combination of the current subspace. At evaluation time, if the task id is given to the model,
+            it uses this convex combination toinstantiate an optimal policy and rollout a trajectory. The table on the right shows that - just as linear growing methods -
+            <b style='color: #ff4b4b'>CSP has 0. forgetting</b>, while it is growing sublinearly (see scalability). Results are aggregated across 4 of our scenarios based on HalfCheetah, each consisting of a
+            sequence of 8 tasks (see Designing Scenarios).
+            """
+            st.markdown("<div style='text-align: justify'>"+txt+"</div>", unsafe_allow_html = True)
+
+        with row_4_2:
+            txt = """
+| Method | Performance |Transfer|<b style='color: #ff4b4b'>Forgetting</b>   | Growing factor |
+|--------|-------------|-------------|--------------|----------------|
+| FT-1   | 0.75 ± 0.16 | 0.20 ± 0.14 |-0.45 ± 0.07|              1 |
+| FT-L2  | 0.81 ± 0.09 | 0.09 ± 0.14 |-0.28 ± 0.1|              2 |
+| EWC    | 0.98 ± 0.14 | 0.14 ± 0.11 |-0.28 ± 0.1|              3 |
+| PNN    | 1.06 ± 0.17 | 0.06 ± 0.18 |0.0 ± 0.0|           47.3 |
+| SAC-N  | 1.0 ± 0.00  | 0.0 ± 0.00  |0.0 ± 0.0|              8 |
+| FT-N   | 1.22 ± 0.1  | 0.22 ± 0.10 |0.0 ± 0.0|              8 |
+| <b style='color: #ff4b4b'>CSP</b> | 1.32 ± 0.07 | 0.31 ± 0.07 |<b style='color: #ff4b4b'>0.00 ± 0.0</b>|      4.0 ± 0.7 |
+                  """
+            st.markdown(txt, unsafe_allow_html = True)
         
 if __name__ == "__main__":
     img = Image.open("data/images/icon.png")
@@ -121,6 +140,6 @@ if __name__ == "__main__":
         layout="wide",
     )
     st.sidebar.markdown("<b>About</b>", unsafe_allow_html = True)
-    st.sidebar.markdown("<div>This website presents interactive demos of our paper.</div>", unsafe_allow_html = True)
+    st.sidebar.markdown("<div>This website presents main results and interactive demos of our paper.</div>", unsafe_allow_html = True)
     st.set_option('deprecation.showPyplotGlobalUse', False)
     run_UI()

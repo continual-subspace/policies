@@ -13,11 +13,13 @@ scenarios = {
 
 #st.title("Visualizing the subspaces"
 st.markdown("<h3 style='text-align: left';>Visualizing the reward landscapes of the Subspaces</h3>",unsafe_allow_html = True)
+st.markdown("<hr>", unsafe_allow_html = True)
 row_0_1,row_0_2 = st.columns([1,3])
 with row_0_1:
-    benchmark = st.selectbox('',["Forgetting_scenario","Transfer_scenario","Distraction_scenario","Composability_scenario"],index=0)
+    benchmark = st.selectbox('',["Forgetting_scenario","Transfer_scenario","Distraction_scenario","Composability_scenario"],index=2)
     n_anchors = st.slider('number of anchors:', 3, 4, 3)
-    task = st.selectbox('Task',range(len(scenarios[benchmark])),format_func=lambda x: scenarios[benchmark][x], index=0)
+    task = st.selectbox('Task',range(len(scenarios[benchmark])),format_func=lambda x: scenarios[benchmark][x], index=1)
+    landscape = st.radio('Landscape value',("Reward","Q-value"))
 
     #path = "/private/home/jbgaya/Work/crl_subspace/data/halfcheetah_benchmark3/2/eval.pkl"
     #task = 0
@@ -33,7 +35,7 @@ with row_0_2:
     path = "data/landscapes/"+benchmark+"/"+str(n_anchors)+"_anchors.pkl"
     with open(path, "rb") as f:
         data = pickle.load(f)["task_"+str(task)]
-    alphas, rewards = data["alphas"].cpu(),data["rewards"].cpu()
+    alphas, rewards = data["alphas"].cpu(),data["values1" if landscape == "Q-value" else "rewards"].cpu()
     display_kshot(n_anchors,alphas,rewards,labels = scenarios[benchmark])
 
     #alphas, rewards, q1 = data["alphas"],data["rewards"],data["values1"]

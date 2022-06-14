@@ -50,6 +50,12 @@ def run():
             This intractable method is yet <b style='color: #ff4b4b'>outperformed by CSP</b> in the majority of the scenarios we designed. A demo of the task sequences solved by an optimal policy
             is available for each Halfcheetah scenario.
             </div>''', unsafe_allow_html = True)
+        st.markdown('''
+            <div style='text-align: justify; padding: 2em 2em 2em 0';>
+            The figure on the right shows the <b style='color: #ff4b4b'>transfer table</b> we generated to design transfer
+            scenarios. A single policy is trained on a first task and then fine-tuned on the second one. The score is normalized by the average score obtained when learning a policy from
+            scratch. Scores below 0 show a negative transfer. In this case, the first task is acting like a disctraction task.
+            </div>''', unsafe_allow_html = True)
 
 
 

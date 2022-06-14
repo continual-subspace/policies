@@ -16,10 +16,6 @@ div[data-testid="stExpander"]{
     margin: 0em 0em 0em 0em;*/
 }
 
-iframe{
-    /*border-radius:22px;*/
-}
-
 div[role="button"]{
     font-family: 'sans-serif', sans-serif !important;
     font-size: 16px;
@@ -36,7 +32,6 @@ h1{
 
 table{
     font-family: 'sans-serif', sans-serif !important;
-    font-size: 0.7vw;
+    font-size: 0.8vw;
     text-align: right !important;
-    right: -15;
 }

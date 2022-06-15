@@ -58,7 +58,7 @@ def run_UI():
         <b style='color: #ff4b4b'>CSP maintains both strong performance and low memory cost</b> even as the number of tasks increases. 
         In contrast, FT-N’s growing factor scales linearly, which makes it impractical for long task sequences.
         """
-        st.markdown("<div style='text-align: justify'>"+txt+"</div>", unsafe_allow_html = True)
+        st.markdown("<div style='text-align: justify'>"+txt+"</div><br><br>", unsafe_allow_html = True)
 
         _df = {
             "method":["CSP","CSP","CSP","FT-N","FT-N","FT-N","CSP","CSP","CSP","FT-N","FT-N","FT-N","CSP","CSP","CSP","FT-N","FT-N","FT-N"],
@@ -103,7 +103,7 @@ def run_UI():
         on a HalfCheetah task that combines two particular variations of the environment (tinyfeet + moon). The upper anchor and the lower left anchor has respectively been trained on the  tinyfeet task and 
         the moon task. Interestingly, it already contains a policy that reaches a <b style='color: #ff4b4b'>performance of 2.98</b> (i.e. 3 times better than a policy learned from scratch with a budget of 1e6 interactions).
         """
-        st.markdown("<div style='text-align: justify'>"+txt+"</div>", unsafe_allow_html = True)
+        st.markdown("<div style='text-align: justify'>"+txt+"</div><br><br>", unsafe_allow_html = True)
         _,row_3_1,_ = st.columns([2,3,2])
         with row_3_1:
             st.image("data/images/plasticity.png")
@@ -112,11 +112,11 @@ def run_UI():
         txt = """
         Contrary to methods like EWC, CSP cannot suffer from <b style='color: #ff4b4b'>catastrophic forgetting</b>. Indeed, at the end of a training task
         the best policy is stored as a convex combination of the current subspace. At evaluation time, if the task id is given to the model,
-        it uses this convex combination toinstantiate an optimal policy and rollout a trajectory. The table below shows that - just as linear growing methods -
+        it uses this convex combination to instantiate an optimal policy and rollout a trajectory. The table below shows that - just as linear growing methods -
         <b style='color: #ff4b4b'>CSP has 0. forgetting</b>, while it is growing sublinearly (see scalability). Results are aggregated across 4 of our scenarios based on HalfCheetah, each consisting of a
         sequence of 8 tasks (see Designing Scenarios).
         """
-        st.markdown("<div style='text-align: justify'>"+txt+"</div>", unsafe_allow_html = True)
+        st.markdown("<div style='text-align: justify'>"+txt+"</div><br><br>", unsafe_allow_html = True)
 
         _,row_4_1,_ = st.columns([2,3,2])
         with row_4_1:

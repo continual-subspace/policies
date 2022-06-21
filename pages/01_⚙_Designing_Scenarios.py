@@ -8,7 +8,7 @@ from utils import *
 from PIL import Image
 
 def run():
-    inject_custom_css('assets/styles.css')
+    
     d = {
         "Forgetting scenario":"<b style='color: #ff4b4b'>Forgetting scenarios</b> are designed such that a single policy tends to forget the former task when learning a new one.",
         "Transfer scenario":"<b style='color: #ff4b4b'>Transfer scenarios</b> are designed such that a single policy has more difficulties to learn a new task after having learned the former one, rather than learning it from scratch. ",
@@ -56,10 +56,6 @@ def run():
             scenarios. A single policy is trained on a first task and then fine-tuned on the second one. The score is normalized by the average score obtained when learning a policy from
             scratch. Scores below 0 show a negative transfer. In this case, the first task is acting like a disctraction task.
             </div>''', unsafe_allow_html = True)
-
-
-
-
     with row_1_2:
         st.image("data/images/forward_table.png")
 
@@ -118,6 +114,7 @@ if __name__ == "__main__":
         page_icon=img,
         layout="wide",
     )
+    inject_custom_css('assets/styles.css')
     st.sidebar.markdown("<b>About</b>", unsafe_allow_html = True)
     st.sidebar.markdown("<div>We designed specific scenarios for different continual learning challenges. Look at the demo to get some insights about them !</div>", unsafe_allow_html = True)
     st.set_option('deprecation.showPyplotGlobalUse', False)

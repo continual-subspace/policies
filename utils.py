@@ -8,7 +8,6 @@ import numpy as np
 import torch
 import pickle
 import plotly.graph_objects as go
-from streamlit_plotly_events import plotly_events
 
 clrmap = ['#364B9A', '#4A7BB7', '#6EA6CD', '#98CAE1', '#C2E4EF',
         '#EAECCC', '#FEDA8B', '#FDB366', '#F67E4B', '#DD3D2D',
